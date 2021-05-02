@@ -1,27 +1,7 @@
-// import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { ImageBackground, StyleSheet, View, Image, Text } from "react-native";
+import useInterval from "../hooks/useInterval"
 
-import React, { useState, useEffect, useRef } from 'react';
-
-function useInterval(callback, delay) {
-  const savedCallback = useRef();
-
-  // Remember the latest callback.
-  useEffect(() => {
-    savedCallback.current = callback;
-  }, [callback]);
-
-  // Set up the interval.
-  useEffect(() => {
-    function tick() {
-      savedCallback.current();
-    }
-    if (delay !== null) {
-      let id = setInterval(tick, delay);
-      return () => clearInterval(id);
-    }
-  }, [delay]);
-}
 
 function WelcomeScreen(props) {
 	
@@ -34,7 +14,7 @@ function WelcomeScreen(props) {
   return (
     <ImageBackground
       style={styles.background}
-      source={require("../assets/welcomescreen.jpg")}
+      //source={require("../assets/welcomescreen.jpg")}
     >
       <View style={styles.loadingContainer}>
 		  <Image
@@ -57,6 +37,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "flex-end",
     alignItems: "center",
+	backgroundColor: "#61dafb",
   },
   buttonsContainer: {
     padding: 20,

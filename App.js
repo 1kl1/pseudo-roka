@@ -1,17 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { NavigationContainer } from "@react-navigation/native";
 
-import WelcomeScreen from "./app/screens/WelcomeScreen"
-import Screen from "./app/components/Screen"
-import { Text } from 'react-native';
-
-
+import WelcomeScreen from "./app/screens/WelcomeScreen";
+import useInterval from "./app/hooks/useInterval";
+import {Text} from 'react-native';
+import navigationTheme from "./app/navigation/navigationTheme";
+import AppNavigator from "./app/navigation/AppNavigator";
 
 export default function App() {
-  return (
-    <WelcomeScreen>
-      <Text>Open up App.js to start working on your app!!</Text>
-    </WelcomeScreen>
-  );
+	let [ready, setReady] = useState(false);
+	
+	setTimeout(()=>{	
+		setReady(true);
+	}, 2000);
+	
+	
+	
+	return (
+		//<NavigationContainer theme={navigationTheme}>
+     	//	<AppNavigator />
+    	//</NavigationContainer>
+		(ready ? <Text>dd</Text> : <WelcomeScreen/>)
+	);
 }
 
 // 37 37 37
