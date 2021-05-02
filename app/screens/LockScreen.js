@@ -5,16 +5,10 @@ import useInterval from "../hooks/useInterval"
 
 function WelcomeScreen({ navigation }) {
 	
-	let [count, setCount] = useState(0);
+	let [spin, setSpin] = useState(0);
 
 	useInterval(() => {
-		if(count != -1)
-			setCount((count + 1));
-		
-		if(count > 8){
-			setCount(-1);
-			navigation.navigate('Locks');
-		}
+		setSpin(spin + 1);
 	}, 225);
 	
   return (
@@ -27,7 +21,7 @@ function WelcomeScreen({ navigation }) {
 		  style={[styles.loading, {
 				  transform: [
 					  {
-						  rotate: (count*45)+'deg'
+						  rotate: (spin*45)+'deg'
 					  }
 				  ]
 			  }]}
@@ -43,17 +37,17 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "flex-end",
     alignItems: "center",
-	backgroundColor: "#61dafb",
+	backgroundColor: "#DDA0DD",
   },
   loadingContainer: {
     position: "absolute",
-    bottom: "30%",
+    top: "30%",
     alignItems: "center",
   },
   loading: {
     // paddingVertical: 20,
-	width: 40,
-    height: 40,
+	width: 400,
+    height: 400,
   },
 });
 
