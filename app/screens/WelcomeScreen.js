@@ -15,7 +15,7 @@ function WelcomeScreen({ navigation }) {
 			setCount(-1);
 			navigation.navigate('Locks');
 		}
-	}, 225);
+	}, 150);
 	
   return (
     <ImageBackground
@@ -27,7 +27,7 @@ function WelcomeScreen({ navigation }) {
 		  style={[styles.loading, {
 				  transform: [
 					  {
-						  rotate: (count*45)+'deg'
+						  rotate: (count*30)+'deg'
 					  }
 				  ]
 			  }]}

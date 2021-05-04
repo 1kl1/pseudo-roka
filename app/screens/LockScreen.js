@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { ImageBackground, StyleSheet, View, Image, Text } from "react-native";
-import useInterval from "../hooks/useInterval"
+import useInterval from "../hooks/useInterval";
+
+import Topbar from "../components/Topbar";
 
 
 function WelcomeScreen({ navigation }) {
@@ -9,69 +11,81 @@ function WelcomeScreen({ navigation }) {
 
 	useInterval(() => {
 		setSpin(spin + 1);
-	}, 225);
+	}, 150);
 	
 	return (
 		<View style={styles.background}>
-			<View style={styles.topBar}>
-				<Image
-					style={styles.topBarMenu}
-					source={require("../assets/menu.png")}/>
-				<Image
-					style={styles.topBarIcon}
-					source={require("../assets/headerIcon.png")}/>
-				<Image
-					style={styles.topBarAlert}
-					source={require("../assets/alert.png")}/>
-			</View>
+			<Topbar/>
 			
 			<Image
 				style={styles.headerBackground}
 				source={require("../assets/backgroundHeader.png")}/>
 			<Image
 				style={styles.headerBackgroundDeco}
-				source={require("../assets/backgroundHeaderDeco.png")}
-				/>
+				source={require("../assets/backgroundHeaderDeco.png")}/>
+			
+			<View style={styles.headerBar}>
+				<View style={{flexDirection:"row", marginVertical: 2.5}}>
+					<Text style={styles.headerbarText}>설치일시 : </Text>
+					<Text style={styles.headerbarDate}>21.03.09 15:54</Text>
+				</View>
+				<View style={{flexDirection:"row", marginVertical: 2.5}}>
+					<Text style={styles.headerbarText}>차단일시 : </Text>
+					<Text style={styles.headerbarDate}>21.05.01 14:13</Text>
+				</View>
+			</View>
 			
 			<View style={styles.loadingContainer}>
 				<Image
-				  style={[styles.loading, {transform: [{rotate: (spin*45)+'deg'}]}]}
+				  style={[styles.loading, {transform: [{rotate: (spin*30)+'deg'}]}]}
 				  source={require("../assets/loading.png")} />
 			</View>
 			<Image
 				style={styles.cameraIcon}
 				source={require("../assets/cameraBlock.png")}/>
+			
+			<View style={styles.flexEnd}>
+				<View style={styles.versionBar}>
+					<Text style={{color:"#fff", marginVertical:3}}>Version</Text>
+					<Text style={{color:"#fff"}}>2.0.03</Text>
+				</View>
+			</View>
 		</View>
 	);
 }
 
 // 한바퀴에 1.8초
 const styles = StyleSheet.create({
-	topBar:{
-		position: "absolute",
+	versionBar:{
+		backgroundColor:"#141617",
 		width: "100%",
-		height: "10%",
-		justifyContent: "flex",
-		top: "0%",
-		zIndex: 1,
+		height: 20,
+		alignItems: "center",
 		flexDirection: "row",
-		padding: 10,
-		marginVertical: 5,
+		justifyContent: "center",
 	},
-	topBarMenu:{
+	flexEnd:{
 		flex: 1,
-		resizeMode: "center",
-		margin: 10,
+		width: "100%",
+		height: 20,
+		justifyContent: "flex-end",
+		alignItems: "center"
 	},
-	topBarIcon:{
-		flex: 4,
-		height: "100%",
-		resizeMode: "center"
+	headerBar: {
+		position: "absolute",
+		top: "10%",
+		marginTop: 20
 	},
-	topBarAlert:{
-		flex: 1,
-		resizeMode: "center",
-		margin: 10
+	headerbarDate: {
+		fontWeight: "regular",
+		color: "#fff",
+		fontSize: 22,
+		marginTop: 1
+	},
+	headerbarText: {
+		color: "#fff",
+		fontSize: 23,
+		fontWeight: "bold",
 	},
 	background: {
 		flex: 1,
@@ -81,7 +95,7 @@ const styles = StyleSheet.create({
 	},
 	headerBackground: {
 		width: "100%",
-		height: 226,
+		height: 200,
 	},
 	headerBackgroundDeco: {
 		width: "100%",
@@ -90,7 +104,7 @@ const styles = StyleSheet.create({
 	},
 	loadingContainer: {
 		position: "absolute",
-		bottom: 200,
+		bottom: 130,
 		alignItems: "center",
 	},
 	loading: {
@@ -100,7 +114,7 @@ const styles = StyleSheet.create({
 	},
 	cameraIcon: {
 		position: "absolute",
-		bottom: 226,
+		bottom: 156,
 		width: 190,
 		height: 190
 	}
