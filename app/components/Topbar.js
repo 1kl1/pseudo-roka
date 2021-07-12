@@ -34,10 +34,11 @@ const styles = StyleSheet.create({
 		flex: 1,
 		resizeMode: "contain",
 		margin: 16,
+		marginLeft: 20
 	},
 	topBarIcon:{
 		flex: 4,
-		height: "100%",
+		height: "95%",
 		resizeMode: "center",
 	},
 	topBarAlert:{
