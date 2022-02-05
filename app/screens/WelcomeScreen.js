@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { ImageBackground, StyleSheet, View, Image, Text } from "react-native";
+import { ImageBackground, StyleSheet, View, Image, Text, Alert } from "react-native";
 import useInterval from "../hooks/useInterval"
 
+import {Constants, Notifications, Permissions} from 'expo';
 
 function WelcomeScreen({ navigation }) {
 	
@@ -14,13 +15,15 @@ function WelcomeScreen({ navigation }) {
 		if(count > 8){
 			setCount(-1);
 			navigation.navigate('Locks');
+      // navigation.navigate('Test');
+
 		}
 	}, 150);
-	
+
   return (
     <ImageBackground
       style={styles.background}
-      // source={require("../assets/welcomescreen.jpg")}
+      source={require("../assets/welcomescreen.jpg")}
     >
       <View style={styles.loadingContainer}>
 		  <Image

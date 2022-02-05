@@ -6,10 +6,10 @@ import LockScreen from "./app/screens/LockScreen";
 export default function App() {
 	return (
 		// (ready ? <Text>dd</Text> : <WelcomeScreen/>)
-		// <NavigationContainer>
-		//	<AppNavigator />
-		//</NavigationContainer>
-		<LockScreen/>
+		<NavigationContainer>
+			<AppNavigator />
+		</NavigationContainer>
+		// <LockScreen/>
 		
 	);
 }
