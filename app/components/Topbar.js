@@ -9,6 +9,7 @@ function Topbar({ style }) {
 				style={styles.topBarMenu}
 				source={require("../assets/menu.png")} />
 			<Image
+			
 				style={styles.topBarIcon}
 				source={require("../assets/headerIcon.png")} />
 			<Image
@@ -39,15 +40,17 @@ const styles = StyleSheet.create({
 		marginLeft: 20
 	},
 	topBarIcon: {
-		flex: 4,
-		height: "110%",
-		resizeMode: "center",
+		flex: 5,
+		top:"3%",
+		height: "85%",
+		
+		resizeMode: "contain",
 	},
 	topBarAlert: {
 		flex: 1,
 		resizeMode: "contain",
 		margin: 10,
-		marginTop: 19,
+		marginTop: "7%",
 		height: "50%"
 	},
 });
