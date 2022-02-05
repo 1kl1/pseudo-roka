@@ -1,22 +1,32 @@
 import React, { useState } from "react";
 import { ImageBackground, StyleSheet, View, Image, Text, TouchableOpacity } from "react-native";
 import useInterval from "../hooks/useInterval";
-
+import DialogInput from 'react-native-dialog-input';
 import Topbar from "../components/Topbar";
+import { AsyncStorage } from 'react-native'
 
-const installDate = "21.03.09 15:54";
-const lockDate = "21.07.01 14:13";
-let dc = new Date("2021-07-01T14:13:00.000");
+// const installDate = "21.03.09 15:54";
+// const lockDate = "22.01.06 19:13";
+// let arr = lockDate.split(/[\s.:]+/);
+
+// let dc = new Date(2000+Number(arr[0]), Number(arr[1])-1, Number(arr[2]),
+// Number(arr[3]), Number(arr[4]));
 
 // `YYYY-MM-DDTHH:mm:ss.sss`
 
 function WelcomeScreen({ navigation }) {
-	
+	const [i_flag, setI_flag] = useState(false);
+	const [l_flag, setL_flag] = useState(false);
+	const [installDate, setInstallDate] = useState( "21.03.09 15:54");
+	const [lockDate, setLockDate] = useState("22.01.06 19:13");
 	let [spin, setSpin] = useState(0);
 
 	useInterval(() => {
 		setSpin(spin + 1);
 	}, 150);
+	let arr = lockDate.split(/[\s.:]+/);
+	let dc = new Date(2000+Number(arr[0]), Number(arr[1])-1, Number(arr[2]),
+Number(arr[3]), Number(arr[4]));
 	
 	let now = new Date();
 	var diff = parseInt((now-dc)/1000);
@@ -34,6 +44,20 @@ function WelcomeScreen({ navigation }) {
 	
 	return (
 		<View style={styles.background}>
+			<DialogInput isDialogVisible={i_flag}
+            title={"설치일자"}
+            message={"입력해주세요."}
+            hintInput ={"yy.mm.dd hh:ss"}
+            submitInput={ (inputText) => {setInstallDate(inputText)} }
+            closeDialog={ ()=>setI_flag(false)}>
+</DialogInput>
+<DialogInput isDialogVisible={l_flag}
+            title={"차단일자"}
+            message={"입력해주세요."}
+            hintInput ={"yy.mm.dd hh:ss"}
+            submitInput={ (inputText) => {setLockDate(inputText)} }
+            closeDialog={ ()=>setL_flag(false)}>
+</DialogInput>
 			<Topbar/>
 			
 			<Image
@@ -45,12 +69,12 @@ function WelcomeScreen({ navigation }) {
 			
 			<View style={styles.headerBar}>
 				<View style={{flexDirection:"row", marginVertical: 2.5}}>
-					<Text style={styles.headerbarText}>설치일시 : </Text>
-					<Text style={styles.headerbarDate}>21.03.09 15:54</Text>
+					<Text onPress={()=>setI_flag(true)} style={styles.headerbarText}>설치일시 : </Text>
+					<Text style={styles.headerbarDate}>{installDate}</Text>
 				</View>
 				<View style={{flexDirection:"row", marginVertical: 2.5}}>
-					<Text style={styles.headerbarText}>차단일시 : </Text>
-					<Text style={styles.headerbarDate}>21.07.01 14:13</Text>
+					<Text onPress={()=>setL_flag(true)} style={styles.headerbarText}>차단일시 : </Text>
+					<Text style={styles.headerbarDate}>{lockDate}</Text>
 				</View>
 			</View>
 			
@@ -69,9 +93,12 @@ function WelcomeScreen({ navigation }) {
 			</View>
 			
 			<View style={styles.flexEnd}>
-				
+			
 				<Image source={require("../assets/button.png")} style={styles.allowBtn}/>
+				
+				
 			  <Text style={styles.title}>카메라 허용</Text>
+			  
 				
 				<View style={styles.versionBar}>
 					<Text style={{color:"#fff", marginVertical:14}}>Version</Text>
@@ -91,13 +118,13 @@ const styles = StyleSheet.create({
 		fontSize: 15,
 		fontWeight: "bold",
 		position:"absolute",
-		bottom:70
+		bottom:"13%"
 	},
 	allowBtn:{
 		width: "95%",
 		height: "10%",
 		resizeMode: "contain",
-		marginBottom: 7,
+		marginBottom: "2%",
 	},
 	timerContainer: {
 		position: "absolute",
@@ -129,7 +156,7 @@ const styles = StyleSheet.create({
 		marginTop: 20
 	},
 	headerbarDate: {
-		fontWeight: "regular",
+		fontWeight: "normal",
 		color: "#fff",
 		fontSize: 22,
 		marginTop: 1
@@ -141,7 +168,7 @@ const styles = StyleSheet.create({
 	},
 	background: {
 		flex: 1,
-		justifyContent: "flex",
+		justifyContent: "flex-start",
 		alignItems: "center",
 		backgroundColor: "#252525",
 	},
